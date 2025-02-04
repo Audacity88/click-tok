@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37D06E1D2D527DA700BC4AC2 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 37D06E1C2D527DA700BC4AC2 /* Appwrite */; };
+		375A8C042D52946500DDA350 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 375A8C032D52946500DDA350 /* Appwrite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37D06E1D2D527DA700BC4AC2 /* Appwrite in Frameworks */,
+				375A8C042D52946500DDA350 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +117,7 @@
 			);
 			name = clicktok;
 			packageProductDependencies = (
-				37D06E1C2D527DA700BC4AC2 /* Appwrite */,
+				375A8C032D52946500DDA350 /* Appwrite */,
 			);
 			productName = clicktok;
 			productReference = 37BBE78F2D5273B000E62E9F /* clicktok.app */;
@@ -202,7 +202,7 @@
 			mainGroup = 37BBE7862D5273B000E62E9F;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				37D06E1B2D527DA700BC4AC2 /* XCRemoteSwiftPackageReference "sdk-for-swift" */,
+				375A8C022D52946500DDA350 /* XCRemoteSwiftPackageReference "sdk-for-apple" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 37BBE7902D5273B000E62E9F /* Products */;
@@ -563,20 +563,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		37D06E1B2D527DA700BC4AC2 /* XCRemoteSwiftPackageReference "sdk-for-swift" */ = {
+		375A8C022D52946500DDA350 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/appwrite/sdk-for-swift";
+			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 8.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		37D06E1C2D527DA700BC4AC2 /* Appwrite */ = {
+		375A8C032D52946500DDA350 /* Appwrite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 37D06E1B2D527DA700BC4AC2 /* XCRemoteSwiftPackageReference "sdk-for-swift" */;
+			package = 375A8C022D52946500DDA350 /* XCRemoteSwiftPackageReference "sdk-for-apple" */;
 			productName = Appwrite;
 		};
 /* End XCSwiftPackageProductDependency section */

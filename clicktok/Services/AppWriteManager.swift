@@ -32,14 +32,14 @@ class AppWriteManager {
     }
     
     func login(email: String, password: String) async throws -> Session {
-        return try await account.createEmailSession(
+        return try await account.createSession(
             email: email,
             password: password
         )
     }
     
     func logout() async throws {
-        try await account.deleteSession(sessionId: "current")
+        _ = try await account.deleteSession(sessionId: "current")
     }
     
     func getCurrentUser() async throws -> User {
@@ -48,43 +48,85 @@ class AppWriteManager {
     
     // MARK: - Database Operations
     
-    func listDocuments(
+    func listDocuments<T: Codable>(
         databaseId: String,
         collectionId: String,
         queries: [String]? = nil
-    ) async throws -> DocumentList {
-        return try await databases.listDocuments(
+    ) async throws -> DocumentList<T> {
+        let result = try await databases.listDocuments(
             databaseId: databaseId,
             collectionId: collectionId,
             queries: queries
         )
+        
+        // Convert the generic document list to our specific type
+        let documents = try result.documents.map { doc -> T in
+            let decoder = JSONDecoder()
+            let data = try JSONSerialization.data(withJSONObject: doc.data)
+            return try decoder.decode(T.self, from: data)
+        }
+        
+        return DocumentList(
+            total: result.total,
+            documents: documents
+        )
     }
     
-    func createDocument(
+    func createDocument<T: Codable>(
         databaseId: String,
         collectionId: String,
         documentId: String,
         data: [String: Any]
-    ) async throws -> Document {
-        return try await databases.createDocument(
+    ) async throws -> Document<T> {
+        let result = try await databases.createDocument(
             databaseId: databaseId,
             collectionId: collectionId,
             documentId: documentId,
             data: data
         )
+        
+        // Convert the generic document to our specific type
+        let decoder = JSONDecoder()
+        let jsonData = try JSONSerialization.data(withJSONObject: result.data)
+        let decodedData = try decoder.decode(T.self, from: jsonData)
+        
+        return Document(
+            $id: result.$id,
+            $collectionId: result.$collectionId,
+            $databaseId: result.$databaseId,
+            $createdAt: result.$createdAt,
+            $updatedAt: result.$updatedAt,
+            $permissions: result.$permissions,
+            data: decodedData
+        )
     }
     
-    func updateDocument(
+    func updateDocument<T: Codable>(
         databaseId: String,
         collectionId: String,
         documentId: String,
         data: [String: Any]
-    ) async throws -> Document {
-        return try await databases.updateDocument(
+    ) async throws -> Document<T> {
+        let result = try await databases.updateDocument(
             databaseId: databaseId,
             collectionId: collectionId,
             documentId: documentId,
             data: data
+        )
+        
+        // Convert the generic document to our specific type
+        let decoder = JSONDecoder()
+        let jsonData = try JSONSerialization.data(withJSONObject: result.data)
+        let decodedData = try decoder.decode(T.self, from: jsonData)
+        
+        return Document(
+            $id: result.$id,
+            $collectionId: result.$collectionId,
+            $databaseId: result.$databaseId,
+            $createdAt: result.$createdAt,
+            $updatedAt: result.$updatedAt,
+            $permissions: result.$permissions,
+            data: decodedData
         )
     }
     
@@ -93,7 +135,7 @@ class AppWriteManager {
         collectionId: String,
         documentId: String
     ) async throws {
-        try await databases.deleteDocument(
+        _ = try await databases.deleteDocument(
             databaseId: databaseId,
             collectionId: collectionId,
             documentId: documentId
@@ -118,15 +160,24 @@ class AppWriteManager {
         )
     }
     
-    func getFileView(bucketId: String, fileId: String) async throws -> URL {
-        return try await storage.getFileView(
+    func getFileView(bucketId: String, fileId: String) -> URL? {
+        let urlString = storage.getFileView(
             bucketId: bucketId,
             fileId: fileId
-        )
+        ).description
+        return URL(string: urlString)
+    }
+    
+    func getFilePreview(bucketId: String, fileId: String) -> URL? {
+        let urlString = storage.getFilePreview(
+            bucketId: bucketId,
+            fileId: fileId
+        ).description
+        return URL(string: urlString)
     }
     
     func deleteFile(bucketId: String, fileId: String) async throws {
-        try await storage.deleteFile(
+        _ = try await storage.deleteFile(
             bucketId: bucketId,
             fileId: fileId
         )
