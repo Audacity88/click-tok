@@ -1,0 +1,49 @@
+{
+    "collectionId": "comments",
+    "databaseId": "67a247c300211b53cde4",
+    "name": "Comments",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"member\")",
+        "update(\"member\")",
+        "delete(\"member\")"
+    ],
+    "documentSecurity": true,
+    "attributes": [
+        {
+            "key": "userId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "videoId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "text",
+            "type": "string",
+            "required": true,
+            "size": 1000
+        },
+        {
+            "key": "createdAt",
+            "type": "double",
+            "required": true
+        }
+    ],
+    "indexes": [
+        {
+            "key": "by_video",
+            "type": "key",
+            "attributes": ["videoId", "createdAt"],
+            "orders": ["DESC"]
+        },
+        {
+            "key": "by_user",
+            "type": "key",
+            "attributes": ["userId", "createdAt"],
+            "orders": ["DESC"]
+        }
+    ]
+} 

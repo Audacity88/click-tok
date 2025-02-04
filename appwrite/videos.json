@@ -1,0 +1,86 @@
+{
+    "collectionId": "videos",
+    "databaseId": "67a247c300211b53cde4",
+    "name": "Videos",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"member\")",
+        "update(\"member\")",
+        "delete(\"member\")"
+    ],
+    "documentSecurity": true,
+    "attributes": [
+        {
+            "key": "title",
+            "type": "string",
+            "required": true,
+            "size": 256
+        },
+        {
+            "key": "caption",
+            "type": "string",
+            "required": true,
+            "size": 1000
+        },
+        {
+            "key": "authorId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "author",
+            "type": "string",
+            "required": true,
+            "size": 256
+        },
+        {
+            "key": "videoFileId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "thumbnailFileId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "likes",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "min": 0
+        },
+        {
+            "key": "comments",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "min": 0
+        },
+        {
+            "key": "shares",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "min": 0
+        },
+        {
+            "key": "createdAt",
+            "type": "double",
+            "required": true
+        }
+    ],
+    "indexes": [
+        {
+            "key": "by_author",
+            "type": "key",
+            "attributes": ["authorId"]
+        },
+        {
+            "key": "by_created",
+            "type": "key",
+            "attributes": ["createdAt"],
+            "orders": ["DESC"]
+        }
+    ]
+} 

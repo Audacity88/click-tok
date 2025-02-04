@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		37D06E1D2D527DA700BC4AC2 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 37D06E1C2D527DA700BC4AC2 /* Appwrite */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		37BBE7A22D5273B200E62E9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D06E1D2D527DA700BC4AC2 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = clicktok;
 			packageProductDependencies = (
+				37D06E1C2D527DA700BC4AC2 /* Appwrite */,
 			);
 			productName = clicktok;
 			productReference = 37BBE78F2D5273B000E62E9F /* clicktok.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 37BBE7862D5273B000E62E9F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				37D06E1B2D527DA700BC4AC2 /* XCRemoteSwiftPackageReference "sdk-for-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 37BBE7902D5273B000E62E9F /* Products */;
 			projectDirPath = "";
@@ -552,6 +561,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		37D06E1B2D527DA700BC4AC2 /* XCRemoteSwiftPackageReference "sdk-for-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appwrite/sdk-for-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37D06E1C2D527DA700BC4AC2 /* Appwrite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37D06E1B2D527DA700BC4AC2 /* XCRemoteSwiftPackageReference "sdk-for-swift" */;
+			productName = Appwrite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 37BBE7872D5273B000E62E9F /* Project object */;
 }

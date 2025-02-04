@@ -1,0 +1,454 @@
+{
+    "projectId": "67a24702001e52a8b032",
+    "projectName": "clicktok",
+    "settings": {
+        "services": {
+            "account": true,
+            "avatars": true,
+            "databases": true,
+            "locale": true,
+            "health": true,
+            "storage": true,
+            "teams": true,
+            "users": true,
+            "functions": true,
+            "graphql": true,
+            "messaging": true
+        },
+        "auth": {
+            "methods": {
+                "jwt": true,
+                "phone": true,
+                "invites": true,
+                "anonymous": true,
+                "email-otp": true,
+                "magic-url": true,
+                "email-password": true
+            },
+            "security": {
+                "duration": 31536000,
+                "limit": 0,
+                "sessionsLimit": 10,
+                "passwordHistory": 0,
+                "passwordDictionary": false,
+                "personalDataCheck": false,
+                "sessionAlerts": false,
+                "mockNumbers": []
+            }
+        }
+    },
+    "databases": [
+        {
+            "$id": "67a247c300211b53cde4",
+            "name": "data",
+            "enabled": true
+        }
+    ],
+    "collections": [
+        {
+            "$id": "videos",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a247c300211b53cde4",
+            "name": "Videos",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "title",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "caption",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "authorId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "author",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "videoFileId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "thumbnailFileId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "createdAt",
+                    "type": "double",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                },
+                {
+                    "key": "likes",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "comments",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "shares",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 9223372036854775807,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "by_author",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "authorId"
+                    ],
+                    "orders": []
+                },
+                {
+                    "key": "by_created",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "likes",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a247c300211b53cde4",
+            "name": "Likes",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "videoId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "createdAt",
+                    "type": "double",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "by_video",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "videoId"
+                    ],
+                    "orders": []
+                },
+                {
+                    "key": "by_user_video",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "userId",
+                        "videoId"
+                    ],
+                    "orders": []
+                }
+            ]
+        },
+        {
+            "$id": "comments",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a247c300211b53cde4",
+            "name": "Comments",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "videoId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "text",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "createdAt",
+                    "type": "double",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "by_video",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "videoId",
+                        "createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                },
+                {
+                    "key": "by_user",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "userId",
+                        "createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "users",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "databaseId": "67a247c300211b53cde4",
+            "name": "Users",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "username",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                },
+                {
+                    "key": "bio",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "avatarFileId",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "createdAt",
+                    "type": "double",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                },
+                {
+                    "key": "followersCount",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "followingCount",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "videosCount",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 9223372036854775807,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "by_created",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "createdAt"
+                    ],
+                    "orders": [
+                        "DESC"
+                    ]
+                },
+                {
+                    "key": "by_username",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "username"
+                    ],
+                    "orders": []
+                }
+            ]
+        }
+    ],
+    "buckets": [
+        {
+            "$id": "thumbnails",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "fileSecurity": true,
+            "name": "Thumbnails",
+            "enabled": true,
+            "maximumFileSize": 5000000,
+            "allowedFileExtensions": [
+                ".jpg",
+                ".jpeg",
+                ".png"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        },
+        {
+            "$id": "videos",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")",
+                "update(\"users\")",
+                "delete(\"users\")"
+            ],
+            "fileSecurity": true,
+            "name": "Videos",
+            "enabled": true,
+            "maximumFileSize": 50000000,
+            "allowedFileExtensions": [
+                ".mp4",
+                ".mov",
+                ".m4v"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        }
+    ]
+}

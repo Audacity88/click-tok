@@ -1,0 +1,77 @@
+{
+    "collectionId": "users",
+    "databaseId": "67a247c300211b53cde4",
+    "name": "Users",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"member\")",
+        "update(\"member\")",
+        "delete(\"member\")"
+    ],
+    "documentSecurity": true,
+    "attributes": [
+        {
+            "key": "username",
+            "type": "string",
+            "required": true,
+            "size": 256
+        },
+        {
+            "key": "name",
+            "type": "string",
+            "required": true,
+            "size": 256
+        },
+        {
+            "key": "bio",
+            "type": "string",
+            "size": 1000,
+            "required": false
+        },
+        {
+            "key": "avatarFileId",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "followersCount",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "min": 0
+        },
+        {
+            "key": "followingCount",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "min": 0
+        },
+        {
+            "key": "videosCount",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "min": 0
+        },
+        {
+            "key": "createdAt",
+            "type": "double",
+            "required": true
+        }
+    ],
+    "indexes": [
+        {
+            "key": "by_username",
+            "type": "key",
+            "attributes": ["username"],
+            "unique": true
+        },
+        {
+            "key": "by_created",
+            "type": "key",
+            "attributes": ["createdAt"],
+            "orders": ["DESC"]
+        }
+    ]
+} 

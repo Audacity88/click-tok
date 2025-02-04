@@ -1,0 +1,42 @@
+{
+    "collectionId": "likes",
+    "databaseId": "67a247c300211b53cde4",
+    "name": "Likes",
+    "permissions": [
+        "read(\"any\")",
+        "create(\"member\")",
+        "update(\"member\")",
+        "delete(\"member\")"
+    ],
+    "documentSecurity": true,
+    "attributes": [
+        {
+            "key": "userId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "videoId",
+            "type": "string",
+            "required": true
+        },
+        {
+            "key": "createdAt",
+            "type": "double",
+            "required": true
+        }
+    ],
+    "indexes": [
+        {
+            "key": "by_user_video",
+            "type": "key",
+            "attributes": ["userId", "videoId"],
+            "unique": true
+        },
+        {
+            "key": "by_video",
+            "type": "key",
+            "attributes": ["videoId"]
+        }
+    ]
+} 
